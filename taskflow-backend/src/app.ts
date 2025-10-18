@@ -9,6 +9,9 @@ dotenv.config();
 import userRoutes from './routes/user.routes';
 import taskRoutes from './routes/task.routes';
 
+console.log('🔍 Debug: User routes imported:', userRoutes);
+console.log('🔍 Debug: Task routes imported:', taskRoutes);
+
 const app = express();
 
 // Middleware
@@ -47,6 +50,8 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/tasks', taskRoutes);
+
+console.log('🔍 Debug: Routes mounted successfully');
 
 // Health check
 app.get('/api/health', (req, res) => {
