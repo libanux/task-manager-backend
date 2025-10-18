@@ -12,8 +12,8 @@ export const generateToken = (payload: JwtPayload): string => {
   }
   
   return jwt.sign(payload, secret, {
-    expiresIn: process.env.JWT_EXPIRES_IN || '24h'
-  });
+  expiresIn: (process.env.JWT_EXPIRES_IN as string | number) || '7d'
+});
 };
 
 /*notes:
