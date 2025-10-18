@@ -7,13 +7,8 @@ export interface JwtPayload {
 
 export const generateToken = (payload: JwtPayload): string => {
   const secret = process.env.JWT_SECRET;
-  if (!secret) {
-    throw new Error('JWT_SECRET environment variable is not defined');
-  }
-  
-  return jwt.sign(payload, secret, {
-  expiresIn: (process.env.JWT_EXPIRES_IN as string | number) || '7d'
-});
+  if (!secret) throw new Error('JWT_SECRET not defined');
+  return jwt.sign(payload, secret, { expiresIn: '7d' });
 };
 
 /*notes:
@@ -64,13 +59,9 @@ SIGNATURE: SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
  */
 export const verifyToken = (token: string): JwtPayload => {
   const secret = process.env.JWT_SECRET;
-  if (!secret) {
-    throw new Error('JWT_SECRET environment variable is not defined');
-  }
-  
+  if (!secret) throw new Error('JWT_SECRET not defined');
   return jwt.verify(token, secret) as JwtPayload;
 };
-
 /*
 
 The jwt.verify() does THREE important checks automatically:
