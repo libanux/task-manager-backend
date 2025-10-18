@@ -6,7 +6,10 @@ const PORT = process.env.PORT || 3000;
 // Start server
 const startServer = async (): Promise<void> => {
   try {
+    console.log('🟢 SERVER: Starting server...');
+    
     await connectDB();
+    console.log('🟢 SERVER: Database connected');
     
     app.listen(PORT, () => {
       console.log(`🚀 Server running on port ${PORT}`);
