@@ -6,7 +6,12 @@ export interface JwtPayload {
 }
 
 export const generateToken = (payload: JwtPayload): string => {
-  return jwt.sign(payload, process.env.JWT_SECRET!, {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    throw new Error('JWT_SECRET environment variable is not defined');
+  }
+  
+  return jwt.sign(payload, secret, {
     expiresIn: process.env.JWT_EXPIRES_IN || '24h'
   });
 };
@@ -58,9 +63,13 @@ PAYLOAD: eyJ1c2VySWQiOiIxMjMiLCJlbWFpbCI6ImpvaG5AdGVzdC5jb20iLCJpYXQiOjE3MDAwMDA
 SIGNATURE: SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
  */
 export const verifyToken = (token: string): JwtPayload => {
-  return jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    throw new Error('JWT_SECRET environment variable is not defined');
+  }
+  
+  return jwt.verify(token, secret) as JwtPayload;
 };
-
 
 /*
 
