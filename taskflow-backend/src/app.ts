@@ -13,8 +13,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:4200', 
-     'https://taskflow-app-2025-cfmrt2ue5-marwa-s-projects.vercel.app'], // Update with your actual frontend URL
+  origin: true,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Accept']
