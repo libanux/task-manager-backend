@@ -13,7 +13,8 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:4200', // Your frontend URL
+  origin: ['http://localhost:4200', 
+     'https://taskflow-app-2025-cfmrt2ue5-marwa-s-projects.vercel.app'], // Update with your actual frontend URL
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Accept']
@@ -29,18 +30,47 @@ With it:
 // Request: {"name": "John", "age": 30}  
 console.log(req.body); // ✅ {name: "John", age: 30} (JavaScript object) */
 
+// Root route - ADDED THIS
+app.get('/', (req, res) => {
+  res.json({ 
+    message: '🚀 TaskFlow Backend API is running!', 
+    timestamp: new Date().toISOString(),
+    version: '1.0.0',
+    endpoints: {
+      health: '/api/health',
+      users: '/api/users',
+      tasks: '/api/tasks'
+    },
+    documentation: 'Visit /api/health for server status'
+  });
+});
+
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/tasks', taskRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', message: 'TaskFlow API is running' });
+  res.json({ 
+    status: 'OK', 
+    message: 'TaskFlow API is running',
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || 'development'
+  });
 });
 
 // 404 handler
 app.use('*', (req, res) => {
-  res.status(404).json({ message: 'Route not found' });
+  res.status(404).json({ 
+    message: 'Route not found',
+    path: req.originalUrl,
+    availableEndpoints: {
+      root: '/',
+      health: '/api/health', 
+      users: '/api/users/*',
+      tasks: '/api/tasks/*'
+    }
+  });
 });
 
 // Global error handler
