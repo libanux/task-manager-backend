@@ -2,11 +2,11 @@
   "name": "taskflow-backend",
   "version": "1.0.0",
   "description": "TaskFlow Backend API",
-  "main": "dist/servers.js",
+  "main": "dist/server.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only servers.ts",
+    "dev": "ts-node-dev --respawn --transpile-only server.ts",
     "build": "tsc",
-    "start": "node dist/servers.js"
+    "start": "node dist/server.js"
   },
   "keywords": [],
   "author": "",
