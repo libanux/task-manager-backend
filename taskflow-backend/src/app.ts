@@ -23,10 +23,15 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: true,
+  origin: [
+    'http://localhost:4200',
+    'https://taskflow-app-2025-odu2kvdtb-marwa-s-projects.vercel.app',
+    'https://taskflow-app-2025.vercel.app',
+    'https://*.vercel.app'  // Allow all Vercel subdomains
+  ],
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Accept']
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Requested-With', 'Origin']
 }));
 /*What it does: Allows your frontend to talk to backend */
 app.use(express.json());/*What it does: Automatically converts JSON requests to
