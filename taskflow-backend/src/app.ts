@@ -1,9 +1,16 @@
+console.log('🟢 APP: Starting app.ts...');
+
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
+
+console.log('🟢 APP: Core imports loaded');
+
 // Load environment variables
 dotenv.config();
+console.log('🟢 APP: Environment variables loaded');
+
 
 // Import routes
 import userRoutes from './routes/user.routes';
