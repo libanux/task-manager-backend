@@ -5,7 +5,7 @@ import { connectDB } from './config/db';
 console.log('🟢 SERVER: Imports loaded');
 
 const PORT = process.env.PORT || 3000;
-console.log('🟢 SERVER: Port set to:', PORT)git
+console.log('🟢 SERVER: Port set to:', PORT)
 
 // Start server
 const startServer = async (): Promise<void> => {
