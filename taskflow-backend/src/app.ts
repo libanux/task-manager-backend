@@ -75,6 +75,18 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+// TEMPORARY TEST ROUTE - NO AUTH REQUIRED
+app.get('/api/tasks-test', (req, res) => {
+  console.log('🟢 TEST: Tasks test route called');
+  res.json({ 
+    message: 'Test route works!', 
+    tasks: [
+      { id: 1, title: 'Test Task 1' },
+      { id: 2, title: 'Test Task 2' }
+    ]
+  });
+});
+
 // 404 handler
 app.use('*', (req, res) => {
   res.status(404).json({ 
